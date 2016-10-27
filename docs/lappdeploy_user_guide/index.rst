@@ -1,7 +1,7 @@
-.. _user-guide:
+.. _lappdeploy_user_guide:
 
 #####################
-lAppUpdate User Guide
+lAppDeploy User Guide
 #####################
 
 The `user manual`_ is designed for a *end-user audience* and details use
