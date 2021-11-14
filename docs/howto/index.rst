@@ -14,5 +14,4 @@ The following topics detail use cases to deploy application.
     :maxdepth: 1
 
     howto_deploy_applications
-    howto_track_application
 

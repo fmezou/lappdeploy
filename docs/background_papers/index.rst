@@ -15,7 +15,6 @@ structure [#f1]_ and the supported :term:`COST`.
     :maxdepth: 1
 
     data-structures
-    supported-products
 
 .. [#f1] should not be confused with configuration files which are detailed in
     the user guide.

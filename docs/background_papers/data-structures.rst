@@ -14,5 +14,4 @@ The following topics provide background papers for data structures that
 .. toctree::
     :maxdepth: 1
 
-    catalog-format
     applist-format
