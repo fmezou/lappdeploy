@@ -32,13 +32,6 @@ So I choose to develop my own deployment system built around two main module:
 * *lapptrack* one checks and downloads applications updates if any (or the full
   installation package)
 
-The *lapptrack* is written only in Python, and it composed of several
-components. The main component is a script (*lapptrack*) in charge of the
-user interface (in text mode), plug-in handling and operations scheduling. The
-bulk of the *lapptrack* part consists of a collection of python modules grouped
-in a package (*cots*). Each of these modules tracks a *product* based
-on the editor's information sources and fetches the updates.
-
 The *lappdeploy* part is written in `command shell`_ and `windows script`_.
 
 .. _freenas: <http://www.freenas.org/>
@@ -52,9 +45,9 @@ The *lappdeploy* part is written in `command shell`_ and `windows script`_.
 Get it
 ******
 
-* `Documentation <http://fmezou.github.io/lappupdate/develop/docs/index.html>`_
-* `Release 0.3.0 (in development) <http://fmezou.github.io/lappupdate/develop/
-  release/lappupdate-develop.zip>`_
+* `Documentation <https://lappdeploy.readthedocs.io/>`_
+* `Release 0.3.0 (in development) <https://github.com/fmezou/lappdeploy/
+   archive/refs/heads/develop.zip>`_
 
 ********
 Features

@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Welcome to lAppUpdate's documentation!
+Welcome to lAppDeploy's documentation!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This is the documentation for lAppupdate |release|, last updated |today|.
+This is the documentation for lAppDeploy |release|, last updated |today|.
 
 Lightweight application update (commonly known as lAppUpdate) is a set of
 scripts to download and deploy application on a small network of computers or
@@ -25,9 +25,6 @@ Parts
     * | :ref:`about`
       | :sub:`Everything you want to know`
 
-    * | :ref:`lapptrack-userguide`
-      | :sub:`detail use cases and the configuration files`
-
     * | :ref:`lappdeploy-userguide`
       | :sub:`detail use cases and the configuration files`
 
@@ -36,9 +33,6 @@ Parts
 
     * | :ref:`releases` (Current version\: :ref:`0.2.1 <release_v0.2.1>`)
       | :sub:`detail releases since 0.1`
-
-    * | :ref:`lapptrack-devguide`
-      | :sub:`describe data, classes and scripts`
 
     * | :ref:`lappdeploy-devguide`
       | :sub:`describe data, and  scripts`
