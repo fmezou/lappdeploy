@@ -70,7 +70,7 @@ if %LOGLEVEL%==DEBUG (
 )
 rem Each release of lAppUpdate is identified by a version number that complies 
 rem with the Semantic Versioning 2.0.0 standard (see http://semver.org/).
-set APPDEPLOY_VERSION=0.2.6
+set APPDEPLOY_VERSION=0.3.0
 
 goto Main  
 
@@ -145,19 +145,22 @@ rem     Usage call :Install package options...
 rem         package: is the full name of the installation package
 rem         options: are the command line options of the installation package (specific to the package) 
 :InstallExe
-call :WriteInfoLog Executing %*
-call %*>>"%UPDATE_LOGFILE%" 2>&1
+set APP_ROOT=%~dp1
+set APP_PKG=%~nx1
+set APP_PKG_OPTIONS=%~2
+call :WriteInfoLog Executing "%APP_PKG%" ("%APP_ROOT%%APP_PKG%" %APP_PKG_OPTIONS%)
+call "%APP_ROOT%%APP_PKG%" %APP_PKG_OPTIONS%>>"%UPDATE_LOGFILE%" 2>&1
 if errorlevel 1 (
-    call :WriteWarningLog Installation of %* failed ^(Errorlevel: %errorlevel%^)
+    call :WriteWarningLog Installation of "%APP_PKG%" failed ^(Errorlevel: %errorlevel%^)
 ) else (
-    call :WriteInfoLog Installation of %* succeded
+    call :WriteInfoLog Installation of "%APP_PKG%" succeded
 )
-if not exist "%~dp1__postinstall__.cmd" goto :EOF
-call "%~dp1__postinstall__.cmd">>"%UPDATE_LOGFILE%" 2>&1
+if not exist "%APP_ROOT%__postinstall__.cmd" goto :EOF
+call "%APP_ROOT%__postinstall__.cmd">>"%UPDATE_LOGFILE%" 2>&1
 if errorlevel 1 (
-    call :WriteWarningLog Post Installation of "%~dp1__postinstall__.cmd" failed ^(Errorlevel: %errorlevel%^)
+    call :WriteWarningLog Post Installation of "%APP_PKG%" failed ^(Errorlevel: %errorlevel%^)
 ) else (
-    call :WriteInfoLog Post Installation of "%~dp1__postinstall__.cmd" succeded
+    call :WriteInfoLog Post Installation of "%APP_PKG%" succeded
 )
 goto :EOF
 
@@ -166,29 +169,34 @@ rem     Execute the MSI package with the optional transform file and the postins
 rem     Usage call :Install package ...
 rem         package: is the full name of the installation package
 :InstallMSI
+set APP_ROOT=%~dp1
+set APP_PKG=%~nx1
+set APP_PKG_TRANSF=%~n1.mst
+set APP_PKG_LOG=%~n1.log
+set APP_PKG_OPTIONS=%~2
 if exist "%~dpn1.mst" (
-  call :WriteInfoLog Installing "%~dpn1.msi" using "%~dpn1.mst"...
-  @%SystemRoot%\System32\msiexec.exe /package "%~dpn1.msi" ALLUSER=2 TRANSFORMS="%~dpn1.mst" /quiet /norestart /log "%TEMP%\%~n1.log"
+  call :WriteInfoLog Installing "%APP_PKG%" ^("%APP_ROOT%%APP_PKG%" %APP_PKG_OPTIONS%^) using "%APP_PKG_TRANSF%"
+  @%SystemRoot%\System32\msiexec.exe /package "%APP_ROOT%%APP_PKG%" ALLUSER=2 %APP_PKG_OPTIONS% TRANSFORMS="%APP_ROOT%%APP_PKG_TRANSF%" /quiet /norestart /log "%TEMP%\%APP_PKG_LOG%"
   if errorlevel 1 (
-    call :WriteWarningLog Installation of "%~dpn1.msi" using "%~dpn1.mst" failed
+    call :WriteWarningLog Installation of "%APP_PKG%" failed ^(Errorlevel: %errorlevel%^)
   ) else (
-    call :WriteInfoLog Installed "%~dpn1.msi" using "%~dpn1.mst"
-  )  
+    call :WriteInfoLog Installation of "%APP_PKG%" succeded
+  )
 ) else (
-  call :WriteInfoLog Installing "%~dpn1.msi"...
-  @%SystemRoot%\System32\msiexec.exe /package "%~dpn1.msi" ALLUSER=2 /quiet /norestart /log "%TEMP%\%~n1.log"
+  call :WriteInfoLog Installing "%APP_PKG%" ^(%APP_ROOT%%APP_PKG% %APP_PKG_OPTIONS%^)
+  @%SystemRoot%\System32\msiexec.exe /package "%APP_ROOT%%APP_PKG%" ALLUSER=2 %APP_PKG_OPTIONS% /quiet /norestart /log "%TEMP%\%APP_PKG_LOG%"
   if errorlevel 1 (
-    call :WriteWarningLog Installation of "%~dpn1.msi" failed ^(Errorlevel: %errorlevel%^)
+    call :WriteWarningLog Installation of "%APP_PKG%" failed ^(Errorlevel: %errorlevel%^)
   ) else (
-    call :WriteInfoLog Installed "%~dpn1.msi"
-  )  
+    call :WriteInfoLog Installation of "%APP_PKG%" succeded
+  )
 )
-if not exist "%~dp1__postinstall__.cmd" goto :EOF
-call "%~dp1__postinstall__.cmd">>"%UPDATE_LOGFILE%" 2>&1
+if not exist "%APP_ROOT%__postinstall__.cmd" goto :EOF
+call "%APP_ROOT%__postinstall__.cmd">>"%UPDATE_LOGFILE%" 2>&1
 if errorlevel 1 (
-    call :WriteWarningLog Post Installation of "%~dp1__postinstall__.cmd" failed ^(Errorlevel: %errorlevel%^)
+    call :WriteWarningLog Post Installation of "%APP_PKG%" failed ^(Errorlevel: %errorlevel%^)
 ) else (
-    call :WriteInfoLog Post Installation of "%~dp1__postinstall__.cmd" succeded
+    call :WriteInfoLog Post Installation of "%APP_PKG%" succeded
 )
 goto :EOF
 
@@ -241,10 +249,11 @@ if not exist "%APPLIST_TO_INSTALL%" goto NoApp
 call :WriteInfoLog Install the missing application or upgrade it
 for /F "delims=; tokens=1,2,3*" %%i in (%APPLIST_TO_INSTALL%) do (
     call :WriteSummary Installing %%i ^(%%j^)
+    call :WriteInfoLog Installing %%i ^(%%j^)
     if /i "%%~xk"==".msi" (
-        call :InstallMSI "%%~k"
+        call :InstallMSI "%%~k" "%%l"
     ) else (
-        call :InstallEXE "%%~k" %%l
+        call :InstallEXE "%%~k" "%%l"
     )
 )
 del "%APPLIST_TO_INSTALL%"
