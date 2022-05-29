@@ -28,5 +28,5 @@ rem Please tune the three below variables to you mail environment.
 rem set SMTP_SERVER=smtp.example.com
 rem set SMTP_SERVER_PORT=25
 rem set TO_MAIL_ADDR=sysadmin@example.com
-rem set FROM_MAIL_ADDR=%COMPUTERNAME%@example.com
+rem set FROM_MAIL_ADDR=%COMPUTERNAME% ^<no-reply@example.com^>
 rem set LOGMAIL=1
