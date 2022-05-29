@@ -42,9 +42,6 @@ if not defined SUMMARY_LOGFILE set SUMMARY_LOGFILE=%TEMP%\appdeploy_summary_toda
 if not defined ARCHIVE_LOGFILE set ARCHIVE_LOGFILE=%SystemRoot%\lappdeploy.log
 if not defined SILENT          set SILENT=1
 if not defined LOGLEVEL        set LOGLEVEL=INFO
-if exist "%UPDATE_LOGFILE%" del "%UPDATE_LOGFILE%"
-if exist "%WARNING_LOGFILE%" del "%WARNING_LOGFILE%"
-if exist "%SUMMARY_LOGFILE%" del "%SUMMARY_LOGFILE%"
 Rem in case of error, the info level is selected
 set LOGERROR=1
 set LOGWARNING=1
@@ -70,7 +67,7 @@ if %LOGLEVEL%==DEBUG (
 )
 rem Each release of lAppUpdate is identified by a version number that complies 
 rem with the Semantic Versioning 2.0.0 standard (see http://semver.org/).
-set APPDEPLOY_VERSION=0.3.0
+set APPDEPLOY_VERSION=0.3.1
 
 goto Main  
 
@@ -141,9 +138,10 @@ goto :EOF
 
 rem InstallExe
 rem     Execute the installation package and the postinstall script if it exist.
-rem     Usage call :Install package options...
+rem     Usage call :InstallExe package option
 rem         package: is the full name of the installation package
-rem         options: are the command line options of the installation package (specific to the package) 
+rem         option: is the command line options of the installation package (specific to the package).
+rem                 If several options are present, the option argument must be enclosed with double quote (")
 :InstallExe
 set APP_ROOT=%~dp1
 set APP_PKG=%~nx1
@@ -166,8 +164,10 @@ goto :EOF
 
 rem InstallMSI
 rem     Execute the MSI package with the optional transform file and the postinstall script if it exist.
-rem     Usage call :Install package ...
+rem     Usage call :InstallMSI package option
 rem         package: is the full name of the installation package
+rem         option: is the command line options of the installation package (specific to the package).
+rem                 If several options are present, the option argument must be enclosed with double quote (")
 :InstallMSI
 set APP_ROOT=%~dp1
 set APP_PKG=%~nx1
@@ -200,7 +200,23 @@ if errorlevel 1 (
 )
 goto :EOF
 
+rem RebootLog
+rem     Reboot log files.
+rem         If log files exist, it implies that the previous session crashed. So to find the root cause
+rem         Log files are kept and a banner is simply added. As the ephemeral log files (UPDATE_LOGFILE,
+rem         WARNING_LOGFILE and SUMMARY_LOGFILE) stand together, the detection is based only on UPDATE_LOGFILE. 
+rem     Usage call :RebootLog
+:RebootLog
+if not exist "%UPDATE_LOGFILE%" goto :EOF
+call :WriteWarningLog Previous execution of the script failed - Restart
+call :WriteSummary #####################################################
+call :WriteSummary # Previous execution of the script failed - Restart #
+call :WriteSummary #####################################################
+goto :EOF
+
 :Main
+rem *** Startup ***
+call :RebootLog
 call :WriteInfoLog Starting AppDeploy (%APPDEPLOY_VERSION%)
 call :WriteSummary Starting AppDeploy (%APPDEPLOY_VERSION%)
 call :WriteDebugLog Used path '%CD%' on %COMPUTERNAME% (user: %USERNAME%)
@@ -274,7 +290,7 @@ goto cleanup
 :CustSoftFail
 call :WriteErrorLog Applications installation failed
 rem archive the current log and send a mail to sysadmin
-if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs "%SUMMARY_LOGFILE%" "%WARNING_LOGFILE%" "%UPDATE_LOGFILE%"
+if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs
 call :ArchiveAndCleanUp
 endlocal                                                       
 exit /b 1
@@ -289,7 +305,7 @@ exit /b 1
 :NoReg
 call :WriteErrorLog Registry tool %REG_PATH% not found
 rem archive the current log and send a mail to sysadmin
-if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs "%SUMMARY_LOGFILE%" "%WARNING_LOGFILE%" "%UPDATE_LOGFILE%"
+if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs
 call :ArchiveAndCleanUp
 endlocal                                                       
 exit /b 1
@@ -299,7 +315,7 @@ call :WriteErrorLog  Usage: %0 [set].
 call :WriteErrorLog  set is the set name, the script use a file named applist-[set].txt
 call :WriteErrorLog  which describing applications to install. all is the default value.
 rem archive the current log and send a mail to sysadmin
-if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs "%SUMMARY_LOGFILE%" "%WARNING_LOGFILE%" "%UPDATE_LOGFILE%"
+if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs
 call :ArchiveAndCleanUp
 popd
 endlocal
@@ -308,7 +324,7 @@ exit /b 2
 :Cleanup 
 rem archive the current log and send a mail to sysadmin
 if defined APPINSTALLED (
-    if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs "%SUMMARY_LOGFILE%" "%WARNING_LOGFILE%" "%UPDATE_LOGFILE%"
+    if %LOGMAIL%==1 %CSCRIPT_PATH% //Nologo //E:vbs _log2mail.vbs
 )
 call :ArchiveAndCleanUp
 popd
