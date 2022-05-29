@@ -65,4 +65,4 @@ Indices and tables
 .. toctree::
     :hidden:
 
-    docs/contents
+    contents

@@ -105,7 +105,7 @@ todo_include_todos = True
 # reStructuredText that will be included at the end of every source file that is
 # read. This the right place to add substitution or target for external links
 rst_epilog = """
-.. include:: /docs/rst-epilog.txt
+.. include:: /rst-epilog.txt
 """
 
 # -- Options for HTML output ----------------------------------------------
