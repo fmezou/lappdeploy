@@ -70,10 +70,10 @@ End If
 If (numLog2MailError=0) Then 
     ' Create the mail
     Set objMessage = CreateObject("CDO.Message")
-    objMessage.Subject = LCase(wshShell.ExpandEnvironmentStrings("%COMPUTERNAME%")) & " lappdeploy results"
-    objMessage.From = LCase(wshShell.ExpandEnvironmentStrings("%FROM_MAIL_ADDR%"))
+    objMessage.Subject = wshShell.ExpandEnvironmentStrings("%COMPUTERNAME%") & " lappdeploy results"
+    objMessage.From = wshShell.ExpandEnvironmentStrings("%FROM_MAIL_ADDR%")
     objMessage.To = strMailAddr
-    objMessage.TextBody = LCase(wshShell.ExpandEnvironmentStrings("%COMPUTERNAME%")) & " lappdeploy log messages" & vbCrlf
+    objMessage.TextBody = wshShell.ExpandEnvironmentStrings("%COMPUTERNAME%") & " lappdeploy log messages" & vbCrlf
 
     ' Add the summary
     strLogFileName=wshShell.ExpandEnvironmentStrings("%SUMMARY_LOGFILE%")
