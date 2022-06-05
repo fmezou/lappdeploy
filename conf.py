@@ -20,6 +20,7 @@ import os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
+sys.path.insert(0, os.path.abspath("../lappdeploy"))
 
 # -- General configuration ------------------------------------------------
 
@@ -105,40 +106,18 @@ todo_include_todos = True
 # reStructuredText that will be included at the end of every source file that is
 # read. This the right place to add substitution or target for external links
 rst_epilog = """
-.. include:: /rst-epilog.txt
+.. include:: /docs/rst-epilog.txt
 """
 
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options, see the documentation.
-#  https://pypi.python.org/pypi/alabaster
+#  https://pypi.org/project/sphinx-rtd-theme/
 html_theme_options = {
-    "description": "Lightweight application deployment<br>{}".format(release),
-    "github_button": True,
-    "github_user": "fmezou",
-    "github_repo": "lappdeploy",
-    "github_banner": False,
-    "fixed_sidebar": False,
-    "extra_nav_links": {
-        "Get it...": "http://fmezou.github.io/"
-    }
-}
-
-# Sidebar options, see the documentation.
-#  https://pypi.python.org/pypi/alabaster
-html_sidebars = {
-    "**": [
-        "about.html",
-        "navigation.html",
-        "sidebar_index.html",  # Project's specific sidebar for Index
-        "relations.html",
-        "searchbox.html",
-        "donate.html",
-    ]
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -324,7 +303,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx.ext.graphviz",
-    "sphinx.ext.githubpages"
+    "sphinx_rtd_theme"
 ]
 
 # Options for sphinx.ext.intersphinx
