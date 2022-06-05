@@ -1,0 +1,3 @@
+### Sphinx
+# In the sphinx documentation, the _build directory is the default output dir.
+/_build/
