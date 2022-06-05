@@ -1,11 +1,12 @@
-#######
-Read-Me
-#######
-.. sectionauthor:: Frédéric MEZOU <frederic.mezou@free.fr>
+**********
+lAppDeploy
+**********
+.. image:: https://readthedocs.org/projects/lappdeploy/badge/?version=latest
+   :target: https://lappdeploy.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
 
-********
 About...
-********
+========
 At the beginning, I searched a way to deploy application for my two personal pc
 from a home server (based on `freenas`_). My searches led me to the following
 products:
@@ -41,17 +42,17 @@ The *lappdeploy* part is written in `command shell`_ and `windows script`_.
 .. _Avast Software Updater: <https://www.avast.com/f-software-updater>
 .. _FileHippo App Manager: <http://filehippo.com/download_app_manager>
 
-******
+
 Get it
-******
+======
 
 * `Documentation <https://lappdeploy.readthedocs.io/>`_
 * `Release 0.3.0 (in development) <https://github.com/fmezou/lappdeploy/
    archive/refs/heads/develop.zip>`_
 
-********
+
 Features
-********
+========
 The requirements for this project were:
 
 * *lappdeploy* run on Microsoft Windows (7 minimum) without prerequisites (i.e.
