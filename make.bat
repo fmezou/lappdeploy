@@ -4,7 +4,7 @@ pushd %~dp0
 
 rem Command file for Sphinx documentation
 set SOURCEDIR=.
-set BUILDDIR=..\build\docs
+set BUILDDIR=.\build
 if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=sphinx-build
 )
