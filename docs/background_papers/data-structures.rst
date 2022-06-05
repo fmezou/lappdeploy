@@ -9,7 +9,7 @@ Data Structures
 ***************
 
 The following topics provide background papers for data structures that
-`lapptrack` uses.
+:ref:`lappdeploy <lappdeploy-userguide_lappdeploy-usage>` uses.
 
 .. toctree::
     :maxdepth: 1

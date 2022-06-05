@@ -16,8 +16,8 @@ Synopsis
 
 Description
 -----------
-This optional script is a `hook script` called when `lappdeploy` script ended an
-installation. See `about_usage-syntax` for details about used syntax.
+This optional script is a :term:`hook script` called when `lappdeploy` script
+ended an installation. See `about_usage-syntax` for details about used syntax.
 
 When ``__postinstall__`` is called the installation package execution ended.
 Thus this hook is designed to host yours additional post installation tasks

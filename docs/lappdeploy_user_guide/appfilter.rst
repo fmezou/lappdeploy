@@ -15,9 +15,9 @@ Synopsis
 
 Description
 -----------
-This script is a `non-public script <Non-public script>`. It filters an
-`applist` file by verifying which applications were installed and if it needed
-to be updated. See `about_usage-syntax` for details about used syntax.
+This script is a :term:`non-public script <Non-public script>`. It filters an
+:term:`applist` file by verifying which applications were installed and if it
+needed to be updated. See `about_usage-syntax` for details about used syntax.
 
 This script is a `Windows Script`_ one. Thus, it must be launched with
 `cscript`_ command. (e.g. :command:`cscript.exe _appfilter.vbs x64`)

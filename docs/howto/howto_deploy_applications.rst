@@ -50,14 +50,14 @@ By default, you have nothing to tune. The default values of
     :file:`lappdeploy.log` in the :envvar:`SystemRoot` directory (typically
     ":file:`C:\Windows\lappdeploy.log`".
 
-*   the `applist` files (at least ":file:`applist-all.txt`") are stored in the
-    :file:`appstore` directory located at the same level that the directory
+*   the :term:`applist` files (at least ":file:`applist-all.txt`") are stored in
+    the :file:`appstore` directory located at the same level that the directory
     containing the :command:`lappdeploy` script.
 
 If these features do not comply with your need, you must consider tuning the
 `lappdeploy-userguide_envvars`. The most efficient way to do that is to use
-:command:`__init__` and :command:`__exit__` `hook scripts <hook script>`. See
-:file:`__init__.cmd.example` and :file:`__exit__.cmd.example` located in the
+:command:`__init__` and :command:`__exit__` :term:`hook scripts <hook script>`.
+See :file:`__init__.cmd.example` and :file:`__exit__.cmd.example` located in the
 directory containing the :command:`lappdeploy` script to have examples.
 
 *   To change the location of :dfn:`applist` files and installers packages, you
@@ -80,7 +80,7 @@ directory containing the :command:`lappdeploy` script to have examples.
 
 Build the application list
 ==========================
-The :command:`lappdeploy` script uses two `applist` files to verify which
+The :command:`lappdeploy` script uses two :term:`applist` files to verify which
 applications were installed and if it needs to be updated: the first one is
 named :file:`applist-all.txt`; the second is named  :file:`applist-{set}.txt`
 where ``{set}`` is the argument passed to :command:`lappdeploy` on the command
@@ -106,7 +106,7 @@ can match :dfn:`applist` files with your Organisational Units (OU).
    :dfn:`applist` files with a separate folder for each product (Mozilla Firefox
    and its extension may be considered as one product). It clarifies the
    installers organisation and allow to have a :command:`__postinstall__`
-   `hook script` for each of them.
+   :term:`hook script` for each of them.
 
 By default, the :dfn:`applist` files are stored in the :file:`appstore`
 directory located at the same level that the directory containing the

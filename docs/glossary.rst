@@ -87,8 +87,8 @@ Glossary
     Throbber
         A throbber is an animated widget used to show that an extended computer
         operation, such as a download, file transfer, or installation is in
-        progress. In contrast to a `progress bar`, a throbber does not inform
-        how much of the action has been completed.
+        progress. In contrast to a :term:`progress bar`, a throbber does not
+        inform how much of the action has been completed.
 
         .. seealso::
 

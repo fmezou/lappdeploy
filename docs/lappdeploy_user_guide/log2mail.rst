@@ -15,7 +15,7 @@ Synopsis
 
 Description
 -----------
-This script is a `non-public script <Non-public script>`. It sends a mail
+This script is a :term:`non-public script <Non-public script>`. It sends a mail
 containing the current `lappdeploy` log messages.
 See `about_usage-syntax` for details about used syntax.
 

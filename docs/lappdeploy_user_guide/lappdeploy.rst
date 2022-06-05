@@ -15,8 +15,8 @@ Synopsis
 
 Description
 -----------
-This script is a `public script <Public script>`. It launches the installer
-package of the standard application.  See `about_usage-syntax`
+This script is a :term:`public script <Public script>`. It launches the
+installer package of the standard application.  See `about_usage-syntax`
 for details about used syntax.
 
 Command line options
@@ -25,7 +25,8 @@ Command line options
 .. option:: set
 
     is the set name, the script use a file named :file:`applist-{set}.txt` which
-    matching `applist file format <applist>`. ``all`` is the default value.
+    matching :term:`applist file format <applist>`. ``all`` is the default
+    value.
 
 Exit code
 ^^^^^^^^^

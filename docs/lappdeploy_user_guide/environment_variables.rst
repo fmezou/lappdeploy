@@ -23,14 +23,14 @@ The following topics details environment variables used by lAppDeploy scripts.
 
 .. envvar:: APPLIST
 
-    Contain the full pathname of the `applist` file.
+    Contain the full pathname of the :term:`applist` file.
 
     Default value: none
 
 .. envvar:: APPLIST_TO_INSTALL
 
     Contain the full pathname of the :doc:`appfilter` output file. This file
-    matches a subset of `applist` syntax by containing only :dfn:`appName`,
+    matches a subset of :term:`applist` syntax by containing only :dfn:`appName`,
     :dfn:`appVersion`, :dfn:`appPackage`, and :dfn:`appArgs` columns.
 
     Default value: none

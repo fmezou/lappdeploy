@@ -16,8 +16,8 @@ Synopsis
 
 Description
 -----------
-This optional script is a `hook script` called when :doc:`lappdeploy` script start.
-See `about_usage-syntax` for details about used syntax.
+This optional script is a :term:`hook script` called when :doc:`lappdeploy`
+script start. See `about_usage-syntax` for details about used syntax.
 
 When ``__init__`` is called no initialisation task have been launched and no
 `environment variables <lappdeploy-userguide_envvars>` are set. Thus this hook is

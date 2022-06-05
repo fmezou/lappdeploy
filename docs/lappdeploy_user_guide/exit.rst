@@ -16,8 +16,8 @@ Synopsis
 
 Description
 -----------
-This optional script is a `hook script` called when `lappdeploy` script end.
-See `about_usage-syntax` for details about used syntax.
+This optional script is a :term:`hook script` called when `lappdeploy` script
+end. See `about_usage-syntax` for details about used syntax.
 
 When ``__exit__`` is called completion tasks have been launched. It is the
 reverse script of `init` hook script. Thus this hook is designed to host
